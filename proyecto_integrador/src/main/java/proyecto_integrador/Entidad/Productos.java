@@ -34,7 +34,7 @@ public class Productos {
         return nombreProducto;
     }
 
-    public void setNombreCompleto(String nombreProducto) {
+    public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
     }
 
@@ -46,11 +46,11 @@ public class Productos {
         this.Descripcion = Descripcion;
     }
 
-    public int getcantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void getContraseña(int cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
     

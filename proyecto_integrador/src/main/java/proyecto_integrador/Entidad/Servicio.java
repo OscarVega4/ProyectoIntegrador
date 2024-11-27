@@ -20,12 +20,12 @@ public class Servicio {
 
 
     // Getters y Setters
-    public Long ServiciosId() {
+    public Long getServiciosId() {
         return ServiciosId;
     }
 
     public void setId(Long ServiciosId) {
-        this.ServiciosId = ServiciosId();
+        this.ServiciosId = getServiciosId();
     }
 
     public String getNombreServicio() {
