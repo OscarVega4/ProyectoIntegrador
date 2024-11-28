@@ -5,27 +5,28 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
 
-public class ServiciosMain {
+public class ClientesMain {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("miUnidadPersistencia");
 
     public static void main(String[] args) {
         EntityManager em = null;
-        
+
         try {
             em = emf.createEntityManager();
 
             
-            crearServicio("Mantenimiento de Paneles", "Servicio de mantenimiento preventivo para paneles solares");
+            crearCliente("Oscar Vega", "oscar.vega@cesde.com", "12345678");
 
-            Servicio servicio = leerServicio(1L); 
-            if (servicio != null) {
+            
+            Clientes cliente = leerCliente(1L);
+            if (cliente != null) {
                 System.out.println(
-                        "Servicio encontrado: " + servicio.getNombreServicio() + ", Descripción: " + servicio.getDescripcion());
+                        "Cliente encontrado: " + cliente.getNombreCompleto() + ", Correo: " + cliente.getCorreo());
             }
 
-            actualizarServicio(1L, "Mantenimiento y Reparación de Paneles", "Servicio de mantenimiento y reparación de paneles solares");
+            actualizarCliente(1L, "Oscar Acevedo", "Oscar.Acevedo@cesde.com", "987654");
 
-            eliminarServicio(1L); 
+            eliminarCliente(1L);
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -38,84 +39,90 @@ public class ServiciosMain {
         }
     }
 
-    
-    public static void crearServicio(String nombre, String descripcion) {
+    public static void crearCliente(String nombre, String correo, String contraseña) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
 
-            Servicio servicio = new Servicio();
-            servicio.setNombreServicio(nombre);
-            servicio.setDescripcion(descripcion);
+            Clientes cliente = new Clientes();
+            cliente.setNombreCompleto(nombre);
+            cliente.setCorreo(correo);
+            cliente.setContraseña(contraseña);
 
-            em.persist(servicio);
+            em.persist(cliente);  
 
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            System.out.println("Error al crear el servicio: " + e.getMessage());
+            System.out.println("Error al crear el cliente: " + e.getMessage());
         } finally {
             em.close();
         }
     }
 
-    public static Servicio leerServicio(Long id) {
+
+    public static Clientes leerCliente(Long id) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.find(Servicio.class, id);
+            return em.find(Clientes.class, id); 
         } catch (Exception e) {
-            System.out.println("Error al leer el servicio: " + e.getMessage());
+            System.out.println("Error al leer el cliente: " + e.getMessage());
             return null;
         } finally {
             em.close();
         }
     }
 
-    public static void actualizarServicio(Long id, String nuevoNombre, String nuevaDescripcion) {
+  
+    public static void actualizarCliente(Long id, String nuevoNombre, String nuevoCorreo, String nuevaContraseña) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
 
-            Servicio servicio = em.find(Servicio.class, id);
-            if (servicio != null) {
-                servicio.setNombreServicio(nuevoNombre);
-                servicio.setDescripcion(nuevaDescripcion);
-                em.merge(servicio);
+            Clientes cliente = em.find(Clientes.class, id); 
+            if (cliente != null) {
+                cliente.setNombreCompleto(nuevoNombre);
+                cliente.setCorreo(nuevoCorreo);
+                cliente.setContraseña(nuevaContraseña);
+                em.merge(cliente);  
                 em.getTransaction().commit();
             } else {
-                System.out.println("Servicio no encontrado con ID: " + id);
+                System.out.println("Cliente no encontrado con ID: " + id);
             }
         } catch (RollbackException e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            System.out.println("Error al actualizar el servicio: " + e.getMessage());
+            System.out.println("Error al actualizar el cliente: " + e.getMessage());
         } finally {
             em.close();
         }
     }
 
-    public static void eliminarServicio(Long id) {
+  
+    public static void eliminarCliente(Long id) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
 
-            Servicio servicio = em.find(Servicio.class, id);
-            if (servicio != null) {
-                em.remove(servicio);
+            Clientes cliente = em.find(Clientes.class, id);  
+            if (cliente != null) {
+                em.remove(cliente); 
                 em.getTransaction().commit();
             } else {
-                System.out.println("Servicio no encontrado con ID: " + id);
+                System.out.println("Cliente no encontrado con ID: " + id);
             }
         } catch (RollbackException e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            System.out.println("Error al eliminar el servicio: " + e.getMessage());
+            System.out.println("Error al eliminar el cliente: " + e.getMessage());
         } finally {
             em.close();
         }
     }
 }
+
+
