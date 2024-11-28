@@ -3,15 +3,15 @@ package proyecto_integrador.Entidad;
 import javax.persistence.Entity;  
 import javax.persistence.GeneratedValue;  
 import javax.persistence.GenerationType;  
-import javax.persistence.Id; // Cambiado AdminId por Id  
+import javax.persistence.Id; 
 import javax.persistence.Table;  
 import javax.persistence.Column;  
 
 @Entity  
 @Table(name = "administradores")  
-public class Administradores { // Cambiado 'Administradores' a 'Administrador'  
+public class Administradores {  
     
-    @Id // Cambiado AdminId por @Id  
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)  
     private Long adminid;  
 
@@ -22,11 +22,11 @@ public class Administradores { // Cambiado 'Administradores' a 'Administrador'
     private int contraseña;  
 
     // Getters y Setters  
-    public Long getAdminId() { // Cambiado a getAdminId  
+    public Long getAdminId() { 
         return adminid;  
     }  
 
-    public void setAdminId(Long adminid) { // Cambiado a setAdminId  
+    public void setAdminId(Long adminid) {
         this.adminid = adminid;  
     }  
 
@@ -38,11 +38,11 @@ public class Administradores { // Cambiado 'Administradores' a 'Administrador'
         this.nombreCompleto = nombreCompleto;  
     }  
 
-    public int getContraseña() { // Cambiado a getContraseña  
+    public int getContraseña() { 
         return contraseña;  
     }  
 
-    public void setContraseña(int contraseña) { // Cambiado a setContraseña  
+    public void setContraseña(int contraseña) { 
         this.contraseña = contraseña;  
     }  
 }
